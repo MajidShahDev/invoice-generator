@@ -1,6 +1,6 @@
 import InvoiceGenerator from '../../component/InvoiceGenerator';
-import MyFormComponent from '../../component/localStorage';
-import MyInputComponent from '../../component/MyInputComponent';
+// import MyFormComponent from '../../component/localStorage';
+// import MyInputComponent from '../../component/MyInputComponent';
 export default function Home() {
   return (
     <>

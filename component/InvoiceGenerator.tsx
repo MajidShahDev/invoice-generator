@@ -546,7 +546,6 @@ const InvoiceGenerator = () => {
                 handleItemChange(index, 'description', e.target.value)
               }
               className="tracking-wider flex-1 p-2 text-gray-900 border border-gray-300 rounded hover:border-gray-400 focus:outline-none focus:border-gray-400 focus:shadow"
-
             />
             <input
               type="number"

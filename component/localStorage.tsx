@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import React, { ChangeEvent } from 'react';
 import useLocalStorageForm from './useLocalStorageForm';
 
@@ -15,16 +15,19 @@ const initialFormState: FormState = {
 };
 
 const MyFormComponent: React.FC = () => {
-  const [form, setForm] = useLocalStorageForm<FormState>('myForm', initialFormState);
+  const [form, setForm] = useLocalStorageForm<FormState>(
+    'myForm',
+    initialFormState
+  );
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
-      setForm((prev) => ({ ...prev, [name]: value }));
-    };
-    
-    return (
-        <div>
-        <p>{form.firstName}</p>
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  return (
+    <div>
+      <p>{form.firstName}</p>
       <label>
         First Name:
         <input
@@ -54,7 +57,6 @@ const MyFormComponent: React.FC = () => {
           className="p-2 border rounded"
         />
       </label>
-
     </div>
   );
 };

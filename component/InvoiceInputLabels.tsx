@@ -18,18 +18,24 @@ export const useInvoiceInputLabels = () => {
       setTaxLabel(localStorage.getItem('taxLabel') || 'Tax');
       setShippingLabel(localStorage.getItem('shippingLabel') || 'Shipping');
       setTotalLabel(localStorage.getItem('totalLabel') || 'Total');
-      setAmountPaidLabel(localStorage.getItem('amountPaidLabel') || 'Amount Paid');
-      setBalanceDueLabel(localStorage.getItem('balanceDueLabel') || 'Balance Due');
+      setAmountPaidLabel(
+        localStorage.getItem('amountPaidLabel') || 'Amount Paid'
+      );
+      setBalanceDueLabel(
+        localStorage.getItem('balanceDueLabel') || 'Balance Due'
+      );
     }
   }, []);
 
   // Save to localStorage when values change
   useEffect(() => {
-    if (subtotalLabel !== 'Subtotal') localStorage.setItem('subtotalLabel', subtotalLabel);
+    if (subtotalLabel !== 'Subtotal')
+      localStorage.setItem('subtotalLabel', subtotalLabel);
   }, [subtotalLabel]);
 
   useEffect(() => {
-    if (discountLabel !== 'Discount') localStorage.setItem('discountLabel', discountLabel);
+    if (discountLabel !== 'Discount')
+      localStorage.setItem('discountLabel', discountLabel);
   }, [discountLabel]);
 
   useEffect(() => {
@@ -37,7 +43,8 @@ export const useInvoiceInputLabels = () => {
   }, [taxLabel]);
 
   useEffect(() => {
-    if (shippingLabel !== 'Shipping') localStorage.setItem('shippingLabel', shippingLabel);
+    if (shippingLabel !== 'Shipping')
+      localStorage.setItem('shippingLabel', shippingLabel);
   }, [shippingLabel]);
 
   useEffect(() => {
@@ -45,11 +52,13 @@ export const useInvoiceInputLabels = () => {
   }, [totalLabel]);
 
   useEffect(() => {
-    if (amountPaidLabel !== 'Amount Paid') localStorage.setItem('amountPaidLabel', amountPaidLabel);
+    if (amountPaidLabel !== 'Amount Paid')
+      localStorage.setItem('amountPaidLabel', amountPaidLabel);
   }, [amountPaidLabel]);
 
   useEffect(() => {
-    if (balanceDueLabel !== 'Balance Due') localStorage.setItem('balanceDueLabel', balanceDueLabel);
+    if (balanceDueLabel !== 'Balance Due')
+      localStorage.setItem('balanceDueLabel', balanceDueLabel);
   }, [balanceDueLabel]);
 
   // Handlers
@@ -118,8 +127,6 @@ export const useInvoiceInputLabels = () => {
     handleClearAllLabels,
   };
 };
-
-
 
 //   // Save to localStorage when values change
 //   useEffect(() => {
