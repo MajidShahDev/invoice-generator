@@ -1,13 +1,17 @@
 'use client';
 import React, { useState, useEffect, ChangeEvent } from 'react';
 
+// get Item = fetch item
+// set Item = save item
+
 const MyInputComponent = () => {
   // Initialize each input field state from localStorage.
   const [newShopping, setShoppingText] = useState(() => {
     if (typeof window !== 'undefined') {
+      // esnsure that running in browser not in ssr
       return localStorage.getItem('newShopping') || '';
     }
-    return '';
+    return ''; // Guarantees that a valid string is returned if ssr.
   });
 
   const [newItem, setItemText] = useState(() => {
@@ -27,7 +31,7 @@ const MyInputComponent = () => {
   // Save to localStorage when any input changes.
   useEffect(() => {
     if (newShopping) {
-      localStorage.setItem('newShopping', newShopping);
+      localStorage.setItem('newShopping', newShopping); // setItem('keyName', valueVariable)
     }
   }, [newShopping]);
 
@@ -58,7 +62,7 @@ const MyInputComponent = () => {
 
   // Handle the Clear All functionality to reset all fields and clear localStorage.
   const handleClearAll = () => {
-    localStorage.removeItem('newShopping');
+    localStorage.removeItem('newShopping'); // localStorage.removeItem() deletes the key-value pair from localStorage.
     localStorage.removeItem('newItem');
     localStorage.removeItem('userComment');
     setShoppingText('');

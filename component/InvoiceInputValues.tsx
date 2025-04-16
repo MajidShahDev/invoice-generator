@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
-interface InvoiceItem {
+export interface ItemsInterface {
   description: string;
   quantity: number;
   price: number;
 }
 
 export const useInvoiceInputValues = () => {
-  const [items, setItems] = useState<InvoiceItem[]>([
+  const [items, setItems] = useState<ItemsInterface[]>([
     { description: '', quantity: 1, price: 0 },
   ]);
 

@@ -179,13 +179,30 @@ export default function CountryInput() {
         value={currency} // Set value to the state
         onChange={handleCurrencyChange} // Handle change event
       >
-        {Object.entries(countryList).map(([currencyCode, countryCode]) => (
-          <option key={currencyCode} value={currencyCode}>
-            {currencyCode}
+        {Object.entries(countryList).map(([currencyCodeKey, _], idx) => (
+          <option key={idx} value={currencyCodeKey}>
+            {currencyCodeKey}
           </option>
         ))}
       </select>
-      <div>Currency: {currency}</div> {/* Display selected currency */}
     </>
   );
 }
+
+
+// Object.entries(countryList) will return an array like this:
+// [
+//   ["USD", "United States"], 
+//   ["EUR", "Eurozone"], 
+//   ["JPY", "Japan"]
+// ]
+
+// .map(([currencyCode, countryCode]) => (...))
+// This loops over each key value pair in the array, first is key, second is value.
+//([key, _])  if we need only key
+//([, value])  if we need only value
+
+
+// Use Object.keys() when you only care about the keys.
+// Use Object.values() when you only care about the values.
+// Use Object.entries() when you need both keys and values.

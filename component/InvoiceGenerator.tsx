@@ -1,12 +1,16 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import { jsPDF } from 'jspdf';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExchange } from '@fortawesome/free-solid-svg-icons';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { countryList } from './codes';
 import { useInvoiceInputLabels } from './InvoiceInputLabels';
 import { useInvoiceInputValues } from './InvoiceInputValues';
+import { ItemsInterface } from './InvoiceInputValues';
+
+import { IoClose } from 'react-icons/io5';
+import { FaArrowRightArrowLeft } from 'react-icons/fa6';
+import { IoMdDownload } from 'react-icons/io';
+import { IoReload } from 'react-icons/io5';
+
 // Invoice Generator Component
 const InvoiceGenerator = () => {
   const invoiceRef = useRef<HTMLDivElement>(null);
@@ -48,188 +52,22 @@ const InvoiceGenerator = () => {
     handleClearAllLabels,
   } = useInvoiceInputLabels();
 
-  // //-------------------------------------------------------------------------
-  // const [subtotalLabel, setSubtotalLabel] = useState('');
-  // const [discountLabel, setDiscountLabel] = useState('');
-  // const [taxLabel, setTaxLabel] = useState('');
-  // const [shippingLabel, setShippingLabel] = useState('');
-  // const [totalLabel, setTotalLabel] = useState('');
-  // const [amountPaidLabel, setAmountPaidLabel] = useState('');
-  // const [balanceDueLabel, setBalanceDueLabel] = useState('');
-
-  // const [items, setItems] = useState([
-  //   { description: '', quantity: 1, price: 0 },
-  // ]);
-  // const [discountVal, setDiscountVal] = useState(0);
-  // const [taxVal, setTaxVal] = useState(0);
-  // const [shippingVal, setShippingVal] = useState(0);
-  // const [amountPaidVal, setAmountPaidVal] = useState(0);
-  // const [currency, setCurrency] = useState('USD'); // Default currency
-
-  // // // Load from localStorage on first client-side render
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     setSubtotalLabel(localStorage.getItem('subtotalLabel') || 'Subtotal');
-  //     setDiscountLabel(localStorage.getItem('discountLabel') || 'Discount');
-  //     setTaxLabel(localStorage.getItem('taxLabel') || 'Tax');
-  //     setShippingLabel(localStorage.getItem('shippingLabel') || 'Shipping');
-  //     setTotalLabel(localStorage.getItem('totalLabel') || 'Total');
-  //     setAmountPaidLabel(
-  //       localStorage.getItem('amountPaidLabel') || 'Amount Paid'
-  //     );
-  //     setBalanceDueLabel(
-  //       localStorage.getItem('balanceDueLabel') || 'Balance Due'
-  //     );
-
-  //     const storedItems = localStorage.getItem('items');
-  //     const storedDiscountVal = localStorage.getItem('discountVal');
-  //     const storedTaxVal = localStorage.getItem('taxVal');
-  //     const storedShippingVal = localStorage.getItem('shippingVal');
-  //     const storedAmountPaidVal = localStorage.getItem('amountPaidVal');
-  //     const storedCurrency = localStorage.getItem('currency');
-
-  //     setItems(
-  //       storedItems
-  //         ? JSON.parse(storedItems)
-  //         : [{ description: '', quantity: 1, price: 0 }]
-  //     );
-  //     setDiscountVal(storedDiscountVal ? parseFloat(storedDiscountVal) : 0);
-  //     setTaxVal(storedTaxVal ? parseFloat(storedTaxVal) : 0);
-  //     setShippingVal(storedShippingVal ? parseFloat(storedShippingVal) : 0);
-  //     setAmountPaidVal(
-  //       storedAmountPaidVal ? parseFloat(storedAmountPaidVal) : 0
-  //     );
-  //     setCurrency(storedCurrency || 'USD');
-  //   }
-  // }, []);
-
-  // // // Save to localStorage whenever the values change
-  // useEffect(() => {
-  //   if (subtotalLabel !== 'Subtotal')
-  //     localStorage.setItem('subtotalLabel', subtotalLabel);
-  // }, [subtotalLabel]);
-
-  // useEffect(() => {
-  //   if (discountLabel !== 'Discount')
-  //     localStorage.setItem('discountLabel', discountLabel);
-  // }, [discountLabel]);
-
-  // useEffect(() => {
-  //   if (taxLabel !== 'Tax') localStorage.setItem('taxLabel', taxLabel);
-  // }, [taxLabel]);
-
-  // useEffect(() => {
-  //   if (shippingLabel !== 'Shipping')
-  //     localStorage.setItem('shippingLabel', shippingLabel);
-  // }, [shippingLabel]);
-
-  // useEffect(() => {
-  //   if (totalLabel !== 'Total') localStorage.setItem('totalLabel', totalLabel);
-  // }, [totalLabel]);
-
-  // useEffect(() => {
-  //   if (amountPaidLabel !== 'Amount Paid')
-  //     localStorage.setItem('amountPaidLabel', amountPaidLabel);
-  // }, [amountPaidLabel]);
-
-  // useEffect(() => {
-  //   if (balanceDueLabel !== 'Balance Due')
-  //     localStorage.setItem('balanceDueLabel', balanceDueLabel);
-  // }, [balanceDueLabel]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('items', JSON.stringify(items));
-  // }, [items]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('discountVal', discountVal.toString());
-  // }, [discountVal]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('taxVal', taxVal.toString());
-  // }, [taxVal]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('shippingVal', shippingVal.toString());
-  // }, [shippingVal]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('amountPaidVal', amountPaidVal.toString());
-  // }, [amountPaidVal]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('currency', currency); // 💰
-  // }, [currency]);
-
-  // // // Label Change Handler
-
-  // const handleSubtotalLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSubtotalLabel(e.target.value);
-  // };
-  // const handleDiscountLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setDiscountLabel(e.target.value);
-  // };
-  // const handleTaxLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setTaxLabel(e.target.value);
-  // };
-  // const handleShippingLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setShippingLabel(e.target.value);
-  // };
-  // const handleTotalLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setTotalLabel(e.target.value);
-  // };
-
-  // const handleAmountPaidLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setAmountPaidLabel(e.target.value);
-  // };
-
-  // const handleBalanceDueLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setBalanceDueLabel(e.target.value);
-  // };
-
-  // const handleClearAllLabels = () => {
-  //   localStorage.removeItem('subtotalLabel');
-  //   localStorage.removeItem('discountLabel');
-  //   localStorage.removeItem('taxLabel');
-  //   localStorage.removeItem('shippingLabel');
-  //   localStorage.removeItem('totalLabel');
-  //   localStorage.removeItem('amountPaidLabel');
-  //   localStorage.removeItem('balanceDueLabel');
-
-  //   setSubtotalLabel('Subtotal');
-  //   setDiscountLabel('Discount');
-  //   setTaxLabel('Tax');
-  //   setShippingLabel('Shipping');
-  //   setTotalLabel('Total');
-  //   setAmountPaidLabel('Amount Paid');
-  //   setBalanceDueLabel('Balance Due');
-  // };
-
-  // const handleClearAllValues = () => {
-  //   localStorage.removeItem('items');
-  //   localStorage.removeItem('discountVal');
-  //   localStorage.removeItem('taxVal');
-  //   localStorage.removeItem('shippingVal');
-  //   localStorage.removeItem('amountPaidVal');
-  //   localStorage.removeItem('currency');
-
-  //   setItems([{ description: '', quantity: 1, price: 0 }]);
-  //   setDiscountVal(0);
-  //   setTaxVal(0);
-  //   setShippingVal(0);
-  //   setAmountPaidVal(0);
-  //   setCurrency('USD');
-  // };
-  //----------------------------------------------------------------------------------------------------------
-  // Handle input changes for description, quantity, and price
   const handleItemChange = (
+    // Handle input changes for description, quantity, and price
     index: number,
-    key: keyof (typeof items)[0],
+    key: keyof ItemsInterface,
     value: string
   ) => {
     const updatedItems = [...items];
-    const parsedValue = key === 'description' ? value : parseFloat(value) || 0;
-    updatedItems[index][key] = parsedValue as never;
+
+    if (key === 'description') {
+      updatedItems[index].description = value;
+    } else if (key === 'quantity') {
+      updatedItems[index].quantity = parseFloat(value) || 0;
+    } else if (key === 'price') {
+      updatedItems[index].price = parseFloat(value) || 0;
+    }
+
     setItems(updatedItems);
   };
 
@@ -397,7 +235,7 @@ const InvoiceGenerator = () => {
       doc.text('Total', 170, yPosition);
       yPosition += 10;
 
-      // Items loop
+      // ItemInterface loop
       items.forEach((item) => {
         if (item.price && item.quantity) {
           doc.text(item.description, 10, yPosition);
@@ -518,64 +356,68 @@ const InvoiceGenerator = () => {
         </div>
 
         {/* Header row for the input columns */}
-        <div className="w-[603px] flex gap-2 mb-4 items-center">
-          <span className="w-[305] tracking-widest text-gray-50 bg-gray-600 p-2 -300 rounded pl-2.5">
+        <div className="w-full max-w-[640px] grid grid-cols-[2.5fr_1.1fr_1.1fr_1.5fr_0.4fr] gap-2 items-center mb-4 tracking-widest">
+          <span className="text-gray-50 bg-gray-600 p-2 rounded">
             Item / Service
           </span>
-          <span className="w-[135] tracking-widest text-center text-gray-50 bg-gray-600 p-2 -300 rounded">
+          <span className="text-gray-50 bg-gray-600 p-2 rounded text-center">
             Quantity
           </span>
-          <span className="w-[135] tracking-widest text-center text-gray-50 bg-gray-600 p-2 -300 rounded">
+          <span className="text-gray-50 bg-gray-600 p-2 rounded text-center">
             Rate
           </span>
-          <span className="w-[197] tracking-widest text-center text-gray-50 bg-gray-600 p-2 -300 rounded">
+          <span className="text-gray-50 bg-gray-600 p-2 rounded text-center">
             Amount
           </span>
-          <span className="w-[40] h-[39px] tracking-widest text-center text-gray-50 bg-gray-600 p-2 -300 rounded">
-            <FontAwesomeIcon icon={faTimes} />
+          <span className="text-gray-50 bg-gray-600 p-2 rounded text-center text-lg h-10 flex items-center justify-center">
+            {/* <FontAwesomeIcon icon={faTimes} /> */}
+            <IoClose />
           </span>
         </div>
 
         {items.map((item, index) => (
-          <div key={index} className="flex gap-2 mb-4 items-center">
+          <div
+            key={index}
+            className="w-full max-w-[640px] tracking-wider grid grid-cols-[2.5fr_1.1fr_1.1fr_1.5fr_0.4fr] gap-2 items-center mb-4"
+          >
             <input
               type="text"
-              placeholder="Description"
               value={item.description}
               onChange={(e) =>
                 handleItemChange(index, 'description', e.target.value)
               }
-              className="tracking-wider flex-1 p-2 text-gray-900 border border-gray-300 rounded hover:border-gray-400 focus:outline-none focus:border-gray-400 focus:shadow"
+              className="p-2 border border-gray-300 rounded w-full transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] hover:border-gray-400 hover:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] selection:bg-gray-300"
+              placeholder="Description"
             />
             <input
               type="number"
-              placeholder="Qty"
-              value={item.quantity.toString()}
+              value={item.quantity}
               onChange={(e) =>
                 handleItemChange(index, 'quantity', e.target.value)
               }
-              className="w-24 p-2 border border-gray-300 rounded focus:outline-none focus:border-gray-400 focus:shadow text-center hover:border-gray-400"
+              className="p-2 border border-gray-300 rounded w-full transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center hover:border-gray-400 selection:bg-gray-300 "
+              placeholder="Qty"
+              // style={{boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px'}}
             />
             <input
               type="number"
-              placeholder="Price"
-              value={item.price.toString()}
+              value={item.price}
               onChange={(e) => handleItemChange(index, 'price', e.target.value)}
-              className="w-24 p-2 border border-gray-300 rounded focus:outline-none focus:border-gray-400 focus:shadow text-center hover:border-gray-400"
+              className="p-2 border border-gray-300 rounded w-full transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center hover:border-gray-400 selection:bg-gray-300"
+              placeholder="Rate"
             />
             <input
               type="text"
               value={`${currency} ${(item.quantity * item.price).toFixed(2)}`}
               readOnly
-              className="w-34 p-2 border border-gray-300 rounded text-center"
               disabled
-              style={{ backgroundColor: 'hsl(0, 0%, 94%)' }}
+              className="p-2 border border-gray-300 rounded w-full text-center bg-gray-100"
             />
             <button
               onClick={() => handleDeleteItem(index)}
-              className="w-[33px] h-[39px] cursor-pointer outline-gray-400 text-center text-gray-400 border border-gray-300 p-3 rounded  hover:text-gray-600 hover:border-gray-500 flex items-center justify-center gap-1 "
+              className="outline-gray-400 p-2 border text-lg border-gray-300 rounded w-full h-10 text-gray-400 hover:text-gray-600 hover:border-gray-500 flex items-center justify-center"
             >
-              <FontAwesomeIcon icon={faTimes} />
+              <IoClose />
             </button>
           </div>
         ))}
@@ -584,7 +426,7 @@ const InvoiceGenerator = () => {
           onClick={addItem}
           className="outline-gray-400 text-2xl w-[211px] text-gray-500 px-4 py-1 rounded border border-gray-300 hover:text-gray-600 hover:border-gray-500 hover:bg-gray cursor-pointer hover:shadow-sm "
         >
-          {/* <FontAwesomeIcon icon={faPlus} /> */}+
+          +
         </button>
 
         {/* Subtotal */}
@@ -594,7 +436,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={subtotalLabel}
               onChange={handleSubtotalLabel}
-              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-400 focus:shadow text-right hover:border-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />{' '}
           </label>
           <span id="subtotal" className="text-blue-600">
@@ -609,7 +451,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={discountLabel}
               onChange={handleDiscountLabel}
-              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-400 focus:shadow text-right hover:border-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />
           </label>
           <div className="relative w-34 ml-2 group">
@@ -618,7 +460,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={discountVal}
               onChange={handleDiscountChange}
-              className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-400 focus:shadow text-center group-hover:border-gray-400"
+              className="w-full p-2 pr-8 border border-gray-300 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600">
               {isDiscountInDollar ? currency : '%'}
@@ -627,9 +469,9 @@ const InvoiceGenerator = () => {
 
           <button
             onClick={toggleDiscountType}
-            className="text-gray-500 w-[33px] h-[40px] border border-gray-300 px-[9px] py-2 rounded hover:border-gray-500  hover:text-gray-600 hover:bg-gray-50 cursor-pointer outline-gray-400"
+            className=" flex items-center justify-center text-gray-500 w-[37px] h-[40px] border border-gray-300 px-[9px] py-2 rounded hover:border-gray-500  hover:text-gray-600 hover:bg-gray-50 cursor-pointer outline-gray-400"
           >
-            <FontAwesomeIcon icon={faExchange} />
+            <FaArrowRightArrowLeft className="text-sm" />
           </button>
         </div>
 
@@ -640,7 +482,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={taxLabel}
               onChange={handleTaxLabel}
-              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-400 focus:shadow text-right hover:border-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />
           </label>
           <div className="relative w-34 ml-2 group">
@@ -649,7 +491,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={taxVal}
               onChange={handleTaxChange}
-              className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-400 focus:shadow text-center group-hover:border-gray-400"
+              className="w-full p-2 pr-8 border border-gray-300 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600">
               {isTaxInDollar ? currency : '%'}
@@ -658,20 +500,20 @@ const InvoiceGenerator = () => {
 
           <button
             onClick={toggleTaxType}
-            className="w-[33px] h-[40px] text-gray-500 border border-gray-300 px-[9px] py-2 rounded hover:border-gray-500  hover:text-gray-600 hover:bg-gray-50 cursor-pointer outline-gray-400  "
+            className="flex items-center justify-center w-[37px] h-[40px] text-gray-500 border border-gray-300 px-[9px] py-2 rounded hover:border-gray-500  hover:text-gray-600 hover:bg-gray-50 cursor-pointer outline-gray-400  "
           >
-            <FontAwesomeIcon icon={faExchange} />
+            <FaArrowRightArrowLeft className="text-sm" />
           </button>
         </div>
 
         {/* Shipping */}
-        <div className="mt-4 text-right flex items-center justify-end gap-1 relative right-10">
+        <div className="mt-4 text-right flex items-center justify-end gap-1 relative right-11">
           <label htmlFor="shippingVal" className="inline-flex items-center">
             <input
               type="text"
               value={shippingLabel}
               onChange={handleShippingLabel}
-              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-400 focus:shadow text-right hover:border-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />
           </label>
           <div className="relative w-34 ml-2 group">
@@ -680,7 +522,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={shippingVal}
               onChange={handleShippingChange}
-              className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-400 focus:shadow text-center group-hover:border-gray-400"
+              className="w-full p-2 pr-8 border border-gray-300 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600">
               {currency}
@@ -695,7 +537,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={totalLabel}
               onChange={handleTotalLabel}
-              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-400 focus:shadow text-right hover:border-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />{' '}
           </label>
           <span
@@ -722,13 +564,13 @@ const InvoiceGenerator = () => {
         </div>
 
         {/* Amount Paid */}
-        <div className="mt-4 text-right relative right-10 flex items-center justify-end gap-3">
+        <div className="mt-4 text-right relative right-11 flex items-center justify-end gap-3">
           <label htmlFor="amount-paid" className="inline-flex items-center">
             <input
               type="text"
               value={amountPaidLabel}
               onChange={handleAmountPaidLabel}
-              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-400 focus:shadow text-right hover:border-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />
           </label>
 
@@ -738,7 +580,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={amountPaidVal}
               onChange={handleAmountPaidChange}
-              className="w-34 p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-400 focus:shadow text-center group-hover:border-gray-400"
+              className="w-34 p-2 pr-8 border border-gray-300 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 text-md">
               {currency}
@@ -753,7 +595,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={balanceDueLabel}
               onChange={handleBalanceDueLabel}
-              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-400 focus:shadow text-right hover:border-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />{' '}
           </label>
           <span
@@ -773,7 +615,7 @@ const InvoiceGenerator = () => {
           onClick={downloadPDF}
           className="bg-green-600 w-[250] cursor-pointer text-white px-4 py-2 border border-green-600 rounded hover:bg-green-700   hover:active:bg-green-800 tracking-wider shadow-md hover:shadow-lg outline-green-800"
         >
-          Download PDF
+          <IoMdDownload className="text-lg inline-block mr-1" /> Download PDF
         </button>
       </div>
 
@@ -783,6 +625,7 @@ const InvoiceGenerator = () => {
           onClick={() => setIsResetModal(true)}
           className="bg-gray-600 w-[250px] cursor-pointer text-white px-4 py-2  rounded hover:bg-gray-700 hover:active:bg-gray-800 mb-24 tracking-wider shadow-md hover:shadow-lg  outline-gray-700"
         >
+          <IoReload className="text-lg inline-block mr-3" />
           Reset Form
         </button>
 
@@ -791,10 +634,11 @@ const InvoiceGenerator = () => {
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md text-center border border-gray-300">
               <h2 className="text-lg font-semibold mb-4 text-gray-800">
-                Are you sure to reset the form?
+                Are you sure you want to reset the form?
               </h2>
               <p className="mb-6 text-gray-600 text-sm tracking-wider">
-                It will reset default labels and you lose all input data.
+                This action will restore default labels and all entered data
+                will be lost.
               </p>
               <div className="flex justify-center gap-4">
                 <button

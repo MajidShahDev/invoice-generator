@@ -10,6 +10,7 @@ export const useInvoiceInputLabels = () => {
   const [balanceDueLabel, setBalanceDueLabel] = useState('Balance Due');
 
   // Load from localStorage only after initial render
+  // check if we're running on browser not on server
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Check if localStorage values exist, then update state

@@ -23,3 +23,5 @@ const eslintConfig = [
 ];
 
 export default eslintConfig;
+
+// ./node_modules/.bin/prettier --write . // format all files
