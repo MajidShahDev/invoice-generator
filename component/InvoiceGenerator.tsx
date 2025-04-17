@@ -386,7 +386,7 @@ const InvoiceGenerator = () => {
               onChange={(e) =>
                 handleItemChange(index, 'description', e.target.value)
               }
-              className="p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] hover:border-gray-400 hover:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] selection:bg-gray-300"
+              className="p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] hover:border-gray-400  selection:bg-gray-300"
               placeholder="Description"
             />
             <input

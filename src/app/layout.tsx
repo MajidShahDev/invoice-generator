@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+// import './input.css';
 
 export const metadata: Metadata = {
   title: 'Invoice Generator',
