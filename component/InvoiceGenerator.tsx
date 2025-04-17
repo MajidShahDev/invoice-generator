@@ -386,7 +386,7 @@ const InvoiceGenerator = () => {
               onChange={(e) =>
                 handleItemChange(index, 'description', e.target.value)
               }
-              className="p-2 border border-gray-300 rounded w-full transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] hover:border-gray-400 hover:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] selection:bg-gray-300"
+              className="p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] hover:border-gray-400 hover:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] selection:bg-gray-300"
               placeholder="Description"
             />
             <input
@@ -395,7 +395,7 @@ const InvoiceGenerator = () => {
               onChange={(e) =>
                 handleItemChange(index, 'quantity', e.target.value)
               }
-              className="p-2 border border-gray-300 rounded w-full transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center hover:border-gray-400 selection:bg-gray-300 "
+              className="p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center hover:border-gray-400 selection:bg-gray-300 "
               placeholder="Qty"
               // style={{boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px'}}
             />
@@ -403,7 +403,7 @@ const InvoiceGenerator = () => {
               type="number"
               value={item.price}
               onChange={(e) => handleItemChange(index, 'price', e.target.value)}
-              className="p-2 border border-gray-300 rounded w-full transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center hover:border-gray-400 selection:bg-gray-300"
+              className="p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center hover:border-gray-400 selection:bg-gray-300"
               placeholder="Rate"
             />
             <input
@@ -436,7 +436,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={subtotalLabel}
               onChange={handleSubtotalLabel}
-              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />{' '}
           </label>
           <span id="subtotal" className="text-blue-600">
@@ -451,7 +451,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={discountLabel}
               onChange={handleDiscountLabel}
-              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />
           </label>
           <div className="relative w-34 ml-2 group">
@@ -460,7 +460,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={discountVal}
               onChange={handleDiscountChange}
-              className="w-full p-2 pr-8 border border-gray-300 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
+              className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600">
               {isDiscountInDollar ? currency : '%'}
@@ -482,7 +482,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={taxLabel}
               onChange={handleTaxLabel}
-              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />
           </label>
           <div className="relative w-34 ml-2 group">
@@ -491,7 +491,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={taxVal}
               onChange={handleTaxChange}
-              className="w-full p-2 pr-8 border border-gray-300 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
+              className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600">
               {isTaxInDollar ? currency : '%'}
@@ -513,7 +513,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={shippingLabel}
               onChange={handleShippingLabel}
-              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />
           </label>
           <div className="relative w-34 ml-2 group">
@@ -522,7 +522,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={shippingVal}
               onChange={handleShippingChange}
-              className="w-full p-2 pr-8 border border-gray-300 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
+              className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600">
               {currency}
@@ -537,7 +537,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={totalLabel}
               onChange={handleTotalLabel}
-              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />{' '}
           </label>
           <span
@@ -570,7 +570,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={amountPaidLabel}
               onChange={handleAmountPaidLabel}
-              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />
           </label>
 
@@ -580,7 +580,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={amountPaidVal}
               onChange={handleAmountPaidChange}
-              className="w-34 p-2 pr-8 border border-gray-300 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
+              className="w-34 p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
             <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 text-md">
               {currency}
@@ -595,7 +595,7 @@ const InvoiceGenerator = () => {
               type="text"
               value={balanceDueLabel}
               onChange={handleBalanceDueLabel}
-              className="w-34 p-2 border border-gray-100 rounded transition-all duration-150 focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
+              className="w-34 p-2 border border-gray-100 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-right hover:border-gray-300 selection:bg-gray-300"
             />{' '}
           </label>
           <span
@@ -626,7 +626,7 @@ const InvoiceGenerator = () => {
           className="bg-gray-600 w-[250px] cursor-pointer text-white px-4 py-2  rounded hover:bg-gray-700 hover:active:bg-gray-800 mb-24 tracking-wider shadow-md hover:shadow-lg  outline-gray-700"
         >
           <IoReload className="text-lg inline-block mr-3" />
-          Reset Form
+             &nbsp;&nbsp;&nbsp;Reset Form
         </button>
 
         {/* Modal */}
