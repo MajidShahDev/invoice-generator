@@ -18,19 +18,6 @@ body {
 .backgroundColor {
   background-color: red;
 }
-
-/* <div className=" mt-4 text-right">
-          Tax:{' '}
-          <input
-            type="text"
-            className="w-24 p-2 border border-gray-300 rounded outline-gray-400 text-center"
-          />
-        </div>
-
-        <div className=" mt-4 text-right">
-          Shipping:{' '}
-          <input
-            type="text"
-            className="w-24 p-2 border border-gray-300 rounded outline-gray-400 text-center"
-          />
-        </div> */
+.backgroundColor {
+  background-color: red;
+}
