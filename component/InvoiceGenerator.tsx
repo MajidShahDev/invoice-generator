@@ -53,19 +53,21 @@ const InvoiceGenerator = () => {
   } = useInvoiceInputLabels();
 
   const handleItemChange = (
-    // Handle input changes for description, quantity, and price
     index: number,
     key: keyof ItemsInterface,
     value: string
   ) => {
     const updatedItems = [...items];
 
+    // Remove leading zeros (e.g., "007" => "7", but allow "0" and "0.5")
+    const sanitizedValue = value.replace(/^0+(?=\d)/, '');
+
     if (key === 'description') {
       updatedItems[index].description = value;
     } else if (key === 'quantity') {
-      updatedItems[index].quantity = parseFloat(value) || 0;
+      updatedItems[index].quantity = parseFloat(sanitizedValue) || 0;
     } else if (key === 'price') {
-      updatedItems[index].price = parseFloat(value) || 0;
+      updatedItems[index].price = parseFloat(sanitizedValue) || 0;
     }
 
     setItems(updatedItems);
@@ -97,10 +99,21 @@ const InvoiceGenerator = () => {
   // Handle Discount Change
   const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let discountValue = e.target.value.trim();
+    // When the input string is longer than one character and doesn’t contain a decimal point,
+    // the function checks if there are any leading zeros.
+    // If leading zeros are found, they are removed by replacing them with an empty string.
 
-    // Remove leading zeros if there is no decimal point
     if (!discountValue.includes('.') && discountValue.length > 1) {
+      // If the input doesn't contain a decimal point and has more than 1 character,
+      // it might have unnecessary leading zeros (e.g., 0111 should become 111).
+      // Examples:
+      // "0111" → should become "111" (leading zeros should be removed)
+      // "0.1" → should stay "0.1" (leading zero removal should be skipped as there's a decimal point)
       discountValue = discountValue.replace(/^0+/, '');
+      // /^0+/ → is a regular expression:
+      // ^ → means start of the string.
+      // 0+ → means one or more zeros.
+      // Find all leading zeros at the start and replace them with nothing (remove them)."
     }
 
     // Convert to number after cleaning
@@ -117,13 +130,8 @@ const InvoiceGenerator = () => {
   const handleTaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let taxValueStr = e.target.value.trim();
 
-    // If no decimal point and the number has more than one character, remove any leading zeros.
     if (!taxValueStr.includes('.') && taxValueStr.length > 1) {
       taxValueStr = taxValueStr.replace(/^0+/, '');
-      // In case the resulting string is empty, default it to '0'
-      if (taxValueStr === '') {
-        taxValueStr = '0';
-      }
     }
 
     const parsedTax = parseFloat(taxValueStr);
@@ -139,12 +147,8 @@ const InvoiceGenerator = () => {
   const handleShippingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let shippingValueStr = e.target.value.trim();
 
-    // If there's no decimal and more than one character, remove all leading zeros.
     if (!shippingValueStr.includes('.') && shippingValueStr.length > 1) {
       shippingValueStr = shippingValueStr.replace(/^0+/, '');
-      if (shippingValueStr === '') {
-        shippingValueStr = '0';
-      }
     }
 
     const parsedShipping = parseFloat(shippingValueStr);
@@ -155,12 +159,8 @@ const InvoiceGenerator = () => {
   const handleAmountPaidChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let amountPaidStr = e.target.value.trim();
 
-    // If there's no decimal and more than one character, remove all leading zeros.
     if (!amountPaidStr.includes('.') && amountPaidStr.length > 1) {
       amountPaidStr = amountPaidStr.replace(/^0+/, '');
-      if (amountPaidStr === '') {
-        amountPaidStr = '0';
-      }
     }
 
     const parsedAmount = parseFloat(amountPaidStr);
@@ -391,7 +391,7 @@ const InvoiceGenerator = () => {
             />
             <input
               type="number"
-              value={item.quantity}
+              value={item.quantity.toString()}
               onChange={(e) =>
                 handleItemChange(index, 'quantity', e.target.value)
               }
@@ -401,7 +401,7 @@ const InvoiceGenerator = () => {
             />
             <input
               type="number"
-              value={item.price}
+              value={item.price.toString()}
               onChange={(e) => handleItemChange(index, 'price', e.target.value)}
               className="p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center hover:border-gray-400 selection:bg-gray-300"
               placeholder="Rate"
@@ -457,8 +457,8 @@ const InvoiceGenerator = () => {
           <div className="relative w-34 ml-2 group">
             <input
               id="discountVal"
-              type="text"
-              value={discountVal}
+              type="number"
+              value={discountVal.toString()}
               onChange={handleDiscountChange}
               className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
@@ -488,8 +488,8 @@ const InvoiceGenerator = () => {
           <div className="relative w-34 ml-2 group">
             <input
               id="taxVal"
-              type="text"
-              value={taxVal}
+              type="number"
+              value={taxVal.toString()}
               onChange={handleTaxChange}
               className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
@@ -519,8 +519,8 @@ const InvoiceGenerator = () => {
           <div className="relative w-34 ml-2 group">
             <input
               id="shippingVal"
-              type="text"
-              value={shippingVal}
+              type="number"
+              value={shippingVal.toString()}
               onChange={handleShippingChange}
               className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
@@ -577,8 +577,8 @@ const InvoiceGenerator = () => {
           <div className="relative group">
             <input
               id="amount-paid"
-              type="text"
-              value={amountPaidVal}
+              type="number"
+              value={amountPaidVal.toString()}
               onChange={handleAmountPaidChange}
               className="w-34 p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
             />
@@ -626,7 +626,7 @@ const InvoiceGenerator = () => {
           className="bg-gray-600 w-[250px] cursor-pointer text-white px-4 py-2  rounded hover:bg-gray-700 hover:active:bg-gray-800 mb-24 tracking-wider shadow-md hover:shadow-lg  outline-gray-700"
         >
           <IoReload className="text-lg inline-block mr-3" />
-             &nbsp;&nbsp;&nbsp;Reset Form
+          &nbsp;&nbsp;&nbsp;Reset Form
         </button>
 
         {/* Modal */}

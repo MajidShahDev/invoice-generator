@@ -2,6 +2,7 @@
 // import BasicInvoice from '../../component/BasicInvoice';
 import InvoiceGenerator from '../../component/InvoiceGenerator';
 // import Heading from '../../component/Heading';
+// import BasicDecimal from '../../component/BasicDecimal';
 export default function Home() {
   return (
     <>
@@ -11,6 +12,7 @@ export default function Home() {
       {/* <BasicInvoice /> */}
       {/* <CountryInput/> */}
       {/* <Heading /> */}
+      {/* <BasicDecimal /> */}
       <InvoiceGenerator />
     </>
   );

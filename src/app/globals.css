@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 
-/* Add this at the bottom or top of your CSS file */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -15,9 +14,6 @@ body {
   /* box-sizing: border-box; */
 }
 
-.backgroundColor {
-  background-color: red;
-}
 .backgroundColor {
   background-color: red;
 }

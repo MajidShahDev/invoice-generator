@@ -7,11 +7,11 @@ interface ItemsInterface {
   price: number;
 }
 
-function BasicInvoice() {
+function BasicDecimal() {
   const [items, setItems] = useState<ItemsInterface[]>([
     { description: "", quantity: 1, price: 0 },
   ]);
-
+  const [discountVal, setDiscountVal] = useState(0);
   const handleItemChange = (
     index: number,
     key: keyof ItemsInterface,
@@ -38,6 +38,21 @@ function BasicInvoice() {
     (acc, item) => acc + item.quantity * item.price,
     0
   );
+
+  const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value;
+  
+    // Remove leading zeros unless it's like "0.5"
+    const sanitized = rawValue.replace(/^0+(?!\.)/, '') || '0';
+  
+    // Update both the value shown and the state
+    setDiscountVal(parseFloat(sanitized));
+    
+    // Optionally update the input field value (for display)
+    e.target.value = sanitized;
+  };
+  
+  
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -76,6 +91,18 @@ function BasicInvoice() {
           />
         </div>
       ))}
+          <div className="relative w-34 ml-2 group block">
+            <input
+              id="discountVal"
+              type="number"
+              value={discountVal}
+              onChange={handleDiscountChange}
+              className="w-full p-2 pr-8 border border-gray-300 rounded focus:outline-none focus:border-gray-300 focus:shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),_0px_2px_6px_2px_rgba(60,64,67,0.15)] text-center group-hover:border-gray-400 selection:bg-gray-300"
+            />
+            {/* <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600">
+              {isDiscountInDollar ? currency : '%'} */}
+            {/* </span> */}
+          </div>
 
       <button
         onClick={addItem}
@@ -91,35 +118,6 @@ function BasicInvoice() {
   );
 }
 
-export default BasicInvoice;
-
-
-
-
-// const handleItemChange = (
-//     index: number,
-//     key: keyof ItemsInterface,
-//     value: string
-//   ) => {
-//     const updatedItems = [...items];
-//     const parsedValue =
-//       key === "description" ? value : parseFloat(value) || 0;
-
-//     updatedItems[index][key] = parsedValue as ItemsInterface[typeof key];
-// //  updatedItems[index][key] = parsedValue as never;
-//     setItems(updatedItems);
-// };
-
-// with as never typescript gives error
-// Type 'string | number' is not assignable to type 'never'.
-// Type 'string' is not assignable to type 'never'.
-
-//It only reports the first failed type in the union — which is "string" in this case.
-// It could also say:
-// Type 'number' is not assignable to type 'never'.
-// as never is type assertion means
-// "I'm treating this value as if it were 'never' (a type that should never exist), just so TypeScript stops complaining and lets me assign it anyway."
-
-
+export default BasicDecimal;
 
 
